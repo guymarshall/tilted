@@ -50,8 +50,8 @@ fn update_camera(
     player: Single<&Transform, (With<Player>, Without<Camera2d>)>,
     time: Res<Time>,
 ) {
-    let Vec3 { x, y, .. } = player.translation;
-    let direction = Vec3::new(x, y, camera.translation.z);
+    let Vec3 { x, y, .. }: Vec3 = player.translation;
+    let direction: Vec3 = Vec3::new(x, y, camera.translation.z);
 
     camera
         .translation
@@ -63,7 +63,7 @@ fn move_player(
     time: Res<Time>,
     keyboard_input: Res<ButtonInput<KeyCode>>,
 ) {
-    let mut direction = Vec2::ZERO;
+    let mut direction: Vec2 = Vec2::ZERO;
 
     if keyboard_input.pressed(KeyCode::KeyW) {
         direction.y += 1.;
@@ -81,7 +81,7 @@ fn move_player(
         direction.x += 1.;
     }
 
-    let move_delta = direction.normalize_or_zero() * PLAYER_SPEED * time.delta_secs();
+    let move_delta: Vec2 = direction.normalize_or_zero() * PLAYER_SPEED * time.delta_secs();
     player.translation += move_delta.extend(0.);
 }
 
